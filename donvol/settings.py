@@ -27,11 +27,10 @@ SECRET_KEY = "django-insecure-qg#kuysx+&cm)jp#hv(j%uuel2jcp4*7u5@1zm79za=r+%)$0r
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    
     "donor-volunteer-management-system.onrender.com",
+    "donor-volunteer-management-system-1.onrender.com",
     "localhost",
     "127.0.0.1",
-
 ]
 
 
@@ -55,7 +54,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+   
 ]
+    
+
 
 ROOT_URLCONF = "donvol.urls"
 
@@ -117,8 +120,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_URLS = BASE_DIR/'static'
+
+
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "app" / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL ="media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
